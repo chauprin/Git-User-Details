@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 
-var App = React.createClass({
+export default class App extends React.Component{
 
-  getInitialState: function() {
-    return {
-      repos: [],
-      bio: []
-    }
-  },
+  constructor(){
+      super();
+      this.state = {name: [], public_repos: []};
+  }
 
-  componentDidMount: function() {
+  componentWillMount() {
     var _this = this;
-    var Hello="Hello";
-    var Hi= "Hi"
-    var username="prince-chauhan"
+    var username="sandys"
     this.serverRequest = axios.get("https://api.github.com/users/"+username).then(function(arr) {    
           _this.setState({
             name : arr.data.name,
@@ -23,14 +19,11 @@ var App = React.createClass({
           console.log(arr.data)
         })
 
-  },
-
-  componentWillUnmount: function() {
-    this.serverRequest.abort();
-  },
+  }
 
   render(){
     return (
+
       <div>
         <h1>repos!</h1>
         Name = {this.state.name}
@@ -39,5 +32,4 @@ var App = React.createClass({
       </div>
     );
   }
-});
-export default App;
+}
